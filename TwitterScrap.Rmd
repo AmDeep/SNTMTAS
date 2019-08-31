@@ -1,0 +1,57 @@
+```{r}
+install.packages("C://Users//Amardeep//Desktop//INTERNSHIP//RTextTools", repos = NULL, type="source")
+
+
+
+```
+```{r}
+install.packages("tree")
+```
+```{r}
+install.packages('RTextTools', dependencies=TRUE, repos='http://cran.rstudio.com/')
+
+```
+```{r}
+tree_url <- "https://cran.r-project.org/src/contrib/Archive/RTextTools/	RTextTools_1.4.2.tar.gz"
+install_url(tree_url)
+```
+```{r}
+library(devtools)
+slam_url <- "https://cran.r-project.org/src/contrib/Archive/maxent/maxent_1.3.3.tar.gz"
+install_url(slam_url)
+
+```
+```{r}
+sd<-read.csv("C://Users//Amardeep//Downloads//train_F3WbcTw.csv")
+```
+```{r}
+library(RTextTools)
+```
+```{r}
+input<-data.frame(c(sd$drug,sd$text))
+output<-data.frame(sd$sentiment)
+```
+```{r}
+# build dtm
+matrix= create_matrix(sd[,1], language="english", 
+                      removeStopwords=FALSE, removeNumbers=TRUE, 
+                      stemWords=FALSE)
+```
+```{r}
+# train the model
+mat = as.matrix(matrix)
+classifier = naiveBayes(mat[1:10,], as.factor(tweets[1:10,2]) )
+```
+```{r}
+train<-read.csv("C://Users//Amardeep//Downloads//train_GzS76OK//train.csv")
+train1<-read.csv("C://Users//Amardeep//Downloads//train_GzS76OK//fulfilment_center_info.csv")
+train2<-read.csv("C://Users//Amardeep//Downloads//train_GzS76OK//meal_info.csv")
+
+```
+```{r}
+m=merge(train,train1,by="center_id")
+mer=merge(m,train2,by="meal_id")
+```
+```{r}
+write.csv(mer,file="C://Users//Amardeep//Downloads//train_GzS76OK//mer.csv")
+```
